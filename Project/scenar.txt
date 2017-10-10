@@ -1,0 +1,41 @@
+vezmi meč
+vezmi vesta
+jdi doupe_zla
+bojuj skřet
+vezmi zlato
+jdi tabor_tulaku
+mluv akara
+vezmi meč_hrdinů
+jdi chladne_planiny
+mluv flavie
+bojuj temná_lučišnice
+jdi tabor_tulaku
+jdi pohrebiste
+bojuj bloodRaven
+zahod meč
+zahod vesta
+vezmi brnění
+jdi tabor_tulaku
+mluv kashya
+vezmi amulet_přesnosti
+batoh
+jdi krypta
+bojuj zombie
+jdi tabor_tulaku
+jdi kamenne_pole
+bojuj
+bojuj padly_demon_champion
+vezmi magický_kámen_moci
+jdi
+jdi tristram
+bojuj griswold
+mluv deckard_cain
+batoh
+vezmi štít_hrdinů
+jdi tabor_tulaku
+jdi katedrala
+jdi tabor_tulaku
+jdi katakomby
+bojuj Andariel
+zahod zlato
+vezmi pohár_vítězství
