@@ -3,15 +3,16 @@
 package main;
 
 
+
 import logika.*;
 import uiText.TextoveRozhrani;
 
 /*******************************************************************************
- * Třída  Start je hlavní třídou projektu,
- * který představuje jednoduchou textovou adventuru určenou k dalším úpravám a rozšiřování
+ * Třída {@code Start} je hlavní třídou projektu,
+ * který ...
  *
- * @author    Jarmila Pavlíčková
- * @version   ZS 2016/2017
+ * @author    jméno autora
+ * @version   0.00.000
  */
 public class Start
 {
@@ -22,15 +23,13 @@ public class Start
      */
     public static void main(String[] args)
     {
+        
         IHra hra = new Hra();
         TextoveRozhrani ui = new TextoveRozhrani(hra);
-        
-        if (args.length < 1) {
-            ui.hraj();
-        } else {
-            ui.hrajZeSouboru(args[0]);
-        }
-    }
+        ui.hraj();
+        System.out.println("Ahoj svete");
+
+        System.out.println("no nazdar");
     
-    private Start() {}
+    }
 }
