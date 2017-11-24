@@ -1,15 +1,17 @@
 package GUI;
 
+import javafx.geometry.Orientation;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import utils.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 import logika.IHra;
 import logika.Prostor;
 /**
  * Created by MajkCajk on 19.11.17.
  */
-public class VychodyBox extends ComboBox implements Observer {
+public class ListVychodu extends ListView implements Observer {
 
     private IHra hra;
     private final ObservableList<String> options = FXCollections.observableArrayList();
@@ -21,7 +23,7 @@ public class VychodyBox extends ComboBox implements Observer {
      *
      * @param hra
      */
-    public VychodyBox(IHra hra) {
+    public ListVychodu(IHra hra) {
         this.hra = hra;
         init();
     }
@@ -32,15 +34,34 @@ public class VychodyBox extends ComboBox implements Observer {
      *
      * @return Vrací Combobox.
      */
-    public ComboBox getComboBox() {
+    public ListView getListView() {
         return this;
     }
 
     public void init() {
         this.setItems(options);
-        this.setPromptText("Zadej lokaci");
-        this.setEditable(true);
-        this.setPrefWidth(150);
+        //this.setEditable(true);
+        //ListView<Prostor> listVychodu = new ListView<Prostor>(options);
+        this.setOrientation(Orientation.HORIZONTAL);
+        this.setPrefHeight(50);
+        this.setCellFactory(param -> new ListCell<Prostor>() {
+            @Override
+            protected void updateItem(Prostor item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null || item.getNazev() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getNazev());
+                }
+                this.setOnMousePressed(event -> {
+                    //hra.getHerniPlan().setAktualniProstor(item);
+                    hra.zpracujPrikaz("jdi "+item.getNazev());
+                    //hra.zpracujPrikaz();
+                });
+            }
+
+        });
+        this.getChildren().addAll(listVychodu);
         hra.getHerniPlan().registerObserver(this);
         update();
 

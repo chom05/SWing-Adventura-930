@@ -40,43 +40,43 @@ public class HerniPlan implements Subject {
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory s popisy
         Prostor taborTulaku = new Prostor("tabor_tulaku",
-           "Nacházíš se ve smutném a poloprázdném táboře bojovnic a tuláků.\n"
-         + "Po příchodu zákeřné Andariel se tento kraj proměnil v ohěň, smrt \n"
-         + "a pláč. Lidé co stihli utéct nemilosrdnému zlu stojí kolem tebe.\n" 
-         + "Vítej v místě poslední naděje. \n", false, 20, 20);
+                "Nacházíš se ve smutném a poloprázdném táboře bojovnic a tuláků.\n"
+                        + "Po příchodu zákeřné Andariel se tento kraj proměnil v ohěň, smrt \n"
+                        + "a pláč. Lidé co stihli utéct nemilosrdnému zlu stojí kolem tebe.\n"
+                        + "Vítej v místě poslední naděje. \n", false, 20, 20);
         Prostor doupeZla = new Prostor("doupe_zla",
-           "Jsi v nechutném a smradlavém doupěti zla \n"
-         + "Zvenku se jeví jako klasická jeskyně, avšak uvnitř se \n"
-         + "skrývá obrovské zlo! Horda nemrtvých a démonů", false, 50,50);
+                "Jsi v nechutném a smradlavém doupěti zla \n"
+                        + "Zvenku se jeví jako klasická jeskyně, avšak uvnitř se \n"
+                        + "skrývá obrovské zlo! Horda nemrtvých a démonů", false, 20,157);
         Prostor chladnePlaniny = new Prostor("chladne_planiny",
-           "Jsi na prastarých pláninách, kde si mnohé místní děti jako malé hrály na \n " 
-         + "schovávanou, nyní se zde potulují obři a prokleté bojovnice\n" 
-         + "z katedrály, měj se zde na velkém pozoru", true, 40, 40);
+                "Jsi na prastarých pláninách, kde si mnohé místní děti jako malé hrály na \n "
+                        + "schovávanou, nyní se zde potulují obři a prokleté bojovnice\n"
+                        + "z katedrály, měj se zde na velkém pozoru", true, 20, 293);
         Prostor pohrebiste = new Prostor("pohrebiste",
-           "Jsi mezi kupou kostí a zničených náhrobků\n"
-         + "Kdysi klidné místo odpočinku pozůstalých, nyní znovu povstali jako netvorové,\n" 
-         + "kterým zde vládne Blood Raven.Kdysi velmi dobrá bojovnice, která však nakonec \n"
-         + "zradila a připojila se (po zaslíbení velké moci) k temné síle", true, 50, 50);
+                "Jsi mezi kupou kostí a zničených náhrobků\n"
+                        + "Kdysi klidné místo odpočinku pozůstalých, nyní znovu povstali jako netvorové,\n"
+                        + "kterým zde vládne Blood Raven.Kdysi velmi dobrá bojovnice, která však nakonec \n"
+                        + "zradila a připojila se (po zaslíbení velké moci) k temné síle", true, 77, 404);
         Prostor krypta = new Prostor("krypta",
-           "Vstoupil si do krypty \n"
-         + "Zde pozůstalé v hrobech už nenajdeš, spíš na tebe zaútočí a budou se tě snažit sežrat. Byla to krypta králů,\n" 
-         + "nyní to je krypta hrůzy a smrti.", true, 60, 60);
-         Prostor kamennePole = new Prostor("kamenne_pole",
-           "na poli plném kamennů, kde uprostřed se tyčí 6 obřích obelisků s tajemnými modře svítícími nápisy \n"
-         + "Zde pozůstalé v hrobech už nenajdeš, spíš na tebe zaútočí a budou se tě snažit sežrat. Byla to krypta králů,\n" 
-         + "nyní to je krypta hrůzy a smrti.", true, 10, 10);
-        Prostor tristram = new Prostor("tristram", 
-           "Ještě nedávno bylo považováno za jedno z nejznámnějších obchodních měst. Nyní je poseto mrtvolami \n "
-         + "a celé v plamenech. Zde najdeš jedině smrt a zlo, avšak měj odvahu bojovníku(z mrtvoly padá zlato, což je fajn :)", true, 15, 15 );
+                "Vstoupil si do krypty \n"
+                        + "Zde pozůstalé v hrobech už nenajdeš, spíš na tebe zaútočí a budou se tě snažit sežrat. Byla to krypta králů,\n"
+                        + "nyní to je krypta hrůzy a smrti.", true, 105, 258);
+        Prostor kamennePole = new Prostor("kamenne_pole",
+                "na poli plném kamennů, kde uprostřed se tyčí 6 obřích obelisků s tajemnými modře svítícími nápisy \n"
+                        + "Zde pozůstalé v hrobech už nenajdeš, spíš na tebe zaútočí a budou se tě snažit sežrat. Byla to krypta králů,\n"
+                        + "nyní to je krypta hrůzy a smrti.", true, 107, 147);
+        Prostor tristram = new Prostor("tristram",
+                "Ještě nedávno bylo považováno za jedno z nejznámnějších obchodních měst. Nyní je poseto mrtvolami \n "
+                        + "a celé v plamenech. Zde najdeš jedině smrt a zlo, avšak měj odvahu bojovníku(z mrtvoly padá zlato, což je fajn :)", true, 131, 0 );
         Prostor katedrala = new Prostor("katedrala",
-           "Vstupuješ do Velké Katedrály. Zde sídlili králové a nejlepší kouzelníci celého kraje. Je to magické místo,\n" 
-         + "což se také pojí s tím, že zde nenajdeš typické zombie a démony ale o hodně podivuhodnější stvoření. \n " 
-         + "Buď připraven na nejhorší, očekávej to nejlepší. Hodně štěstí bojovníku.", true, 25, 25);
-        Prostor katakomby = new Prostor("katakomby", 
-           "Dostal si se přímo do komnat nádherné královny, která kdysi byla velmi oblíbená a milována.\n" 
-         + "Do těchto míst se podíval malokterý muž :P Nyní tady avšak nejsi za radostí, nýbrž za pomstou, za zlobou. \n" 
-         + "Zde už všechna sranda končí bojovníku\n" 
-         + "Zabij tu proklatou Andariel!!", true, 35, 35);
+                "Vstupuješ do Velké Katedrály. Zde sídlili králové a nejlepší kouzelníci celého kraje. Je to magické místo,\n"
+                        + "což se také pojí s tím, že zde nenajdeš typické zombie a démony ale o hodně podivuhodnější stvoření. \n "
+                        + "Buď připraven na nejhorší, očekávej to nejlepší. Hodně štěstí bojovníku.", true, 252, 54);
+        Prostor katakomby = new Prostor("katakomby",
+                "Dostal si se přímo do komnat nádherné královny, která kdysi byla velmi oblíbená a milována.\n"
+                        + "Do těchto míst se podíval malokterý muž :P Nyní tady avšak nejsi za radostí, nýbrž za pomstou, za zlobou. \n"
+                        + "Zde už všechna sranda končí bojovníku\n"
+                        + "Zabij tu proklatou Andariel!!", true, 252, 230);
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
         taborTulaku.setVychod(doupeZla);
@@ -114,10 +114,10 @@ public class HerniPlan implements Subject {
 
         // vytvoříme několik věcí - PŘENOSITELNÉ
         Vec mec = new Vec("meč", "Základní meč, který se dostává po dokončení tréninku", true, "mec.jpg");
-        Vec mecHrdinu = new Vec(mecHrdinuFinal, "Hrdinský meč kdysi ukovaným nejlepším kouzelníkem z Katedrály.\n" 
+        Vec mecHrdinu = new Vec(mecHrdinuFinal, "Hrdinský meč kdysi ukovaným nejlepším kouzelníkem z Katedrály.\n"
         + "\tBuď pyšný na to, že ho zrovna ty můžeš mít. Tu starou trosku zahoď ze svého inventáře, \n"
         + "\taby si mohl používat tento meč hrdinů", true, "mec.jpg");
-        Vec stitHrdinu = new Vec("štít_hrdinů", 
+        Vec stitHrdinu = new Vec("štít_hrdinů",
         "Hrdinský magický štít s velkou mocí, jen opravdový hrdina může nosit tento štít, jsi opravdový hrdina?", true, "mec.jpg");
         Vec vesta = new Vec(vestaFinal, "Kožená vesnická vesta", true, "mec.jpg");
         Vec brneni = new Vec("brnění", "Karbonové brnění nejvyšší kvality, stvořené z nejlepších \n"

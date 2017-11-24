@@ -62,8 +62,8 @@ public class Mapa extends AnchorPane implements Observer {
 
     @Override
     public void update() {
-        app.setX(hra.getHerniPlan().getAktualniProstor().getPosTop());
-        app.setY(hra.getHerniPlan().getAktualniProstor().getPosLeft());
+        postava.setX(hra.getHerniPlan().getAktualniProstor().getPosTop());
+        postava.setY(hra.getHerniPlan().getAktualniProstor().getPosLeft());
         //this.setTopAnchor(postava, hra.getHerniPlan().getAktualniProstor().getPosTop());
         //this.setLeftAnchor(postava, hra.getHerniPlan().getAktualniProstor().getPosLeft());
     }

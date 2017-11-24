@@ -50,7 +50,7 @@ public class Main extends Application {
     private MenuLista menuLista;
     private BatohSeznam batohSeznam;
     private SeznamVeci seznamVeci;
-    private VychodyBox vychodyBox;
+    private ListVychodu listVychodu;
     private Button prostorButton;
     private Button zahodButton;
 
@@ -69,7 +69,7 @@ public class Main extends Application {
         batohSeznam = new BatohSeznam(hra);
         seznamVeci = new SeznamVeci(hra, this);
 
-        vychodyBox = new VychodyBox(hra);
+        listVychodu = new ListVychodu(hra);
         prostorButton = new Button("Potvrdit");
         zahodButton = new Button("Zahodit");
 
@@ -93,7 +93,7 @@ public class Main extends Application {
         centralText.setEditable(false);
         borderPaneInside.setCenter(centralText);
 
-        initProstorBox();
+        initListProstoru();
 
 
         //label s textem zadej prikaz
@@ -126,7 +126,7 @@ public class Main extends Application {
         dolniLista.setAlignment(Pos.CENTER);
         dolniLista.getChildren().addAll(zadejPrikazLabel,zadejPrikazTextArea,buttonPane);
 
-        buttonPane.setLeft(vychodyBox);
+        buttonPane.setLeft(listVychodu);
         buttonPane.setRight(prostorButton);
 
         zahodButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -157,12 +157,12 @@ public class Main extends Application {
         zadejPrikazTextArea.requestFocus();
     }
 
-    private void initProstorBox() {
+    private void initListProstoru() {
         prostorButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
-                String value = (String) vychodyBox.getComboBox().getValue();
+                String value = (String) listVychodu.getListView().get();
                 String prikaz = "jdi " + value;
                 String text = hra.zpracujPrikaz(prikaz);
 
