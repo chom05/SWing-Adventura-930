@@ -98,6 +98,15 @@ public class Batoh
     }
 
     /**
+     * Vrací List věcí v batohu
+     *
+     * @return   seznam     list věcí v batohu
+     */
+    public List<Vec> getObsahBatohu() {
+        return batoh;
+    }
+
+    /**
      * Metoda najde věc, na kterou chceme odkázat
      * 
      * @param   nazev      název věci, kterou chceme najít

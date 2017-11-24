@@ -61,6 +61,7 @@ public class PrikazVezmi implements IPrikaz
         
         if (!vec.isPrenositelna()) {
             herniPlan.getAktualniProstor().vlozVec(vec);
+            herniPlan.notifyObservers();
             return "věc '" + nazevVeci + "' fakt neuneseš";
         }
        
@@ -70,6 +71,7 @@ public class PrikazVezmi implements IPrikaz
            }
 
         batoh.vlozVec(vec);
+        herniPlan.notifyObservers();
         return "věc '" + nazevVeci + "' jsi uložil do batohu";
     }
     /**

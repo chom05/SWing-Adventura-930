@@ -47,6 +47,7 @@ public class PrikazZahod implements IPrikaz
         }
         
         herniPlan.getAktualniProstor().vlozVec(vec);
+        herniPlan.notifyObservers();
         
         return "věc '" + nazevVeci + "' jsi zahodil z batohu";
     }

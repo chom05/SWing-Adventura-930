@@ -36,6 +36,9 @@ public class Prostor {
     private Map<String, Vec> veci;
     private Prostor zavisly;
 
+    private double posLeft;
+    private double posTop;
+
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -44,16 +47,25 @@ public class Prostor {
      * víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis, boolean zamcena) {
+    public Prostor(String nazev, String popis, boolean zamcena, double posLeft, double posTop) {
         this.nazev = nazev;
         this.popis = popis;
         this.zamcena = zamcena;
+        this.posLeft = posLeft;
+        this.posTop = posTop;
         seznamPostav = new ArrayList<>();
         seznamMonster = new ArrayList<>();
         vychody = new HashSet<>();
         veci = new HashMap<>();
     }
 
+    public double getPosLeft() {
+        return posLeft;
+    }
+
+    public double getPosTop() {
+        return posTop;
+    }
     /**
      * Definuje východ z prostoru (sousední/vedlejsi prostor). Vzhledem k tomu,
      * že je použit Set pro uložení východů, může být sousední prostor uveden
@@ -86,7 +98,6 @@ public class Prostor {
      *
      * Bližší popis metody equals je u třídy Object.
      *
-     * @param o object, který se má porovnávat s aktuálním
      * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
      */  
     @Override
@@ -302,6 +313,15 @@ public class Prostor {
         return Collections.unmodifiableCollection(vychody);
     }
 
+    public List<Prostor> getOdemceneVychody(){
+        List<Prostor> odemceneVychody = new ArrayList<>();
+       for(Prostor prostor : vychody){
+           if(!prostor.isZamcena())
+               odemceneVychody.add(prostor);
+       }
+       return odemceneVychody;
+    }
+
     /**
      *  Metoda vloží věc do prostoru
      *  @param vec která se vloží do prostoru
@@ -312,7 +332,6 @@ public class Prostor {
 
     /**
      *  Metoda vloží věc do prostoru
-     *  @param vec která se vloží do prostoru
      */
     public Vec odeberVec(String nazev) {
         return veci.remove(nazev);
@@ -378,6 +397,15 @@ public class Prostor {
             }
         }
         return hledane;
+    }
+
+    /**
+     * Metoda vrati veci z prostoru v podobe listu
+     *
+     */
+    public List<Vec> getVeci() {
+        List<Vec> vecicky = new ArrayList<Vec>(veci.values());
+        return vecicky;
     }
 
     /**
