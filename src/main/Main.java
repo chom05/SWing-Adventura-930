@@ -49,7 +49,7 @@ public class Main extends Application {
     private ImageView hrac;
     private MenuLista menuLista;
     private BatohSeznam batohSeznam;
-    private SeznamVeci seznamVeci;
+    private ListVeciVProstoru listVeciVProstoru;
     private ListVychodu listVychodu;
     private Button prostorButton;
     private Button zahodButton;
@@ -67,7 +67,7 @@ public class Main extends Application {
         hrac = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/postava.png"), 96, 123, false, true));
         menuLista = new MenuLista(hra, this);
         batohSeznam = new BatohSeznam(hra);
-        seznamVeci = new SeznamVeci(hra, this);
+        listVeciVProstoru = new ListVeciVProstoru(hra, this);
 
         listVychodu = new ListVychodu(hra);
         prostorButton = new Button("Potvrdit");
@@ -76,10 +76,10 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
         BorderPane borderPaneInside = new BorderPane();
         BorderPane borderPaneRight = new BorderPane();
-        borderPaneRight.setPadding(new Insets(0, 10, 5, 10));
+        borderPaneRight.setPadding(new Insets(0, 0, 0, 10));
         BorderPane borderPaneRightBottom = new BorderPane();
-        BorderPane buttonPane = new BorderPane();
-        buttonPane.setPadding(new Insets(10, 20, 10, 20));
+        borderPaneRightBottom.setPadding(new Insets(0, 0, 0, 10));
+        //BorderPane buttonPane = new BorderPane();
         borderPane.setCenter(borderPaneInside);
 
         inventory.setText("Inventář");
@@ -93,7 +93,7 @@ public class Main extends Application {
         centralText.setEditable(false);
         borderPaneInside.setCenter(centralText);
 
-        initListProstoru();
+        //initListProstoru();
 
 
         //label s textem zadej prikaz
@@ -124,10 +124,10 @@ public class Main extends Application {
 
         FlowPane dolniLista = new FlowPane();
         dolniLista.setAlignment(Pos.CENTER);
-        dolniLista.getChildren().addAll(zadejPrikazLabel,zadejPrikazTextArea,buttonPane);
+        dolniLista.getChildren().addAll(zadejPrikazLabel,zadejPrikazTextArea);
 
-        buttonPane.setLeft(listVychodu);
-        buttonPane.setRight(prostorButton);
+        //buttonPane.setLeft(listVychodu);
+        //buttonPane.setRight(prostorButton);
 
         zahodButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -136,12 +136,13 @@ public class Main extends Application {
             }
         });
 
-        borderPaneRight.setTop(seznamVeci);
+        borderPaneRight.setTop(listVeciVProstoru);
         borderPaneRight.setCenter(inventory);
         borderPaneRight.setCenter(borderPaneRightBottom);
 
         borderPaneRightBottom.setLeft(hrac);
         borderPaneRightBottom.setRight(batohSeznam);
+        borderPaneRightBottom.setBottom(listVychodu);
 
         borderPaneInside.setTop(mapa);
         borderPane.setBottom(dolniLista);
@@ -149,7 +150,7 @@ public class Main extends Application {
         borderPane.setRight(borderPaneRight);
         //borderPane.setLeft(borderPaneRightBottom);
 
-        Scene scene = new Scene(borderPane, 720, 900);
+        Scene scene = new Scene(borderPane, 750, 900);
         primaryStage.setTitle("Adventura");
 
         primaryStage.setScene(scene);
@@ -157,6 +158,7 @@ public class Main extends Application {
         zadejPrikazTextArea.requestFocus();
     }
 
+    /*
     private void initListProstoru() {
         prostorButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -175,6 +177,7 @@ public class Main extends Application {
             }
         });
     }
+    */
 
     public TextArea getCentralText() {
         return centralText;

@@ -1,31 +1,27 @@
 package GUI;
 
-import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import logika.IHra;
+import logika.Vec;
+import main.Main;
+import utils.Observer;
+
 import java.util.List;
 
-import javafx.scene.layout.AnchorPane;
-import logika.Vec;
-import utils.Observer;
-import logika.IHra;
-import main.Main;
-
 /**
- * Třída vytvářející panel batohu.
- *
- * @author Michal Chobola - chom05
- * @created ZS 2017/2018
+ * Created by MajkCajk on 21.11.17.
  */
-public class BatohSeznam extends AnchorPane implements Observer {
+public class ListVeciVProstoru extends AnchorPane implements Observer {
 
     private IHra hra;
+    private Main main;
     private ObservableList<Vec> data = FXCollections.observableArrayList();
 
     /**
@@ -34,17 +30,18 @@ public class BatohSeznam extends AnchorPane implements Observer {
      *
      * @param hra
      */
-    public BatohSeznam(IHra hra) {
+    public ListVeciVProstoru(IHra hra, Main main) {
         this.hra = hra;
+        this.main = main;
         init();
     }
 
     private void init() {
         ListView<Vec> listVeciVProstoru = new ListView<>(data);
         listVeciVProstoru.setOrientation(Orientation.VERTICAL);
-        listVeciVProstoru.setMaxHeight(123);
-        listVeciVProstoru.setMinWidth(115);
-        listVeciVProstoru.setMaxWidth(115);
+        listVeciVProstoru.setMaxHeight(main.getMapa().getImgHeight());
+        listVeciVProstoru.setMinWidth(220);
+        listVeciVProstoru.setMaxWidth(220);
         listVeciVProstoru.setCellFactory(param -> new ListCell<Vec>() {
             private ImageView imageView;
             @Override
@@ -56,12 +53,12 @@ public class BatohSeznam extends AnchorPane implements Observer {
                 } else {
                     setText(item.getNazev());
                     imageView = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/" + item.getNazevObrazku()), 50, 50, false, false));
-                    imageView.setFitHeight(20);
+                    imageView.setFitHeight(40);
                     imageView.setPreserveRatio(true);
                     setGraphic(imageView);
                 }
                 this.setOnMousePressed(event -> {
-                    hra.zpracujPrikaz("zahod "+item.getNazev());
+                    hra.zpracujPrikaz("vezmi "+item.getNazev());
                     hra.getHerniPlan().notifyObservers();
                     update();
                 });
@@ -70,6 +67,7 @@ public class BatohSeznam extends AnchorPane implements Observer {
         this.getChildren().addAll(listVeciVProstoru);
         hra.getHerniPlan().registerObserver(this);
         update();
+
     }
 
     /**
@@ -80,10 +78,10 @@ public class BatohSeznam extends AnchorPane implements Observer {
     public void update() {
 
         List<Vec> seznamVeci;
-        seznamVeci = hra.getHerniPlan().getBatoh().getObsahBatohu();
+        seznamVeci = hra.getHerniPlan().getAktualniProstor().getVeci();
         data.clear();
         for (Vec x : seznamVeci) {
-            //ImageView obrazek = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/" + x.getNazevObrazku()), 10, 10, false, false));
+            //ImageView obrazek = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/" + x.getNazevObrazku()), 50, 50, false, false));
             data.add(x);
         }
     }

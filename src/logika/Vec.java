@@ -2,6 +2,8 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
  
 package logika;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ListCell;
 
 /*******************************************************************************
  * Instance třídy Vec představují věci s kterými s může hráč v průběhu hry setkat
@@ -69,4 +71,5 @@ public class Vec {
         return nazevObrazku;
 
     }
+
 }

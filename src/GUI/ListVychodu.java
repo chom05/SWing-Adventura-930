@@ -3,6 +3,7 @@ package GUI;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import utils.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,17 +12,15 @@ import logika.Prostor;
 /**
  * Created by MajkCajk on 19.11.17.
  */
-public class ListVychodu extends ListView implements Observer {
+public class ListVychodu extends AnchorPane implements Observer {
 
     private IHra hra;
     private final ObservableList<String> options = FXCollections.observableArrayList();
-    String value = " ";
 
     /**
      * Konstruktor, který zavoláním metody init, zaregistruje pozorovatele a
      * nadefinuje podobu ComboBoxu.
      *
-     * @param hra
      */
     public ListVychodu(IHra hra) {
         this.hra = hra;
@@ -34,32 +33,26 @@ public class ListVychodu extends ListView implements Observer {
      *
      * @return Vrací Combobox.
      */
-    public ListView getListView() {
+    public AnchorPane getListView() {
         return this;
     }
 
     public void init() {
-        this.setItems(options);
-        //this.setEditable(true);
-        //ListView<Prostor> listVychodu = new ListView<Prostor>(options);
-        this.setOrientation(Orientation.HORIZONTAL);
-        this.setPrefHeight(50);
-        this.setCellFactory(param -> new ListCell<Prostor>() {
+        ListView<String> listVychodu = new ListView<>(options);
+        listVychodu.setOrientation(Orientation.VERTICAL);
+        listVychodu.setPrefHeight(200);
+        listVychodu.setMinWidth(213);
+        listVychodu.setMaxWidth(213);
+        listVychodu.setCellFactory(param -> new ListCell<String>() {
+
             @Override
-            protected void updateItem(Prostor item, boolean empty) {
+            protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null || item.getNazev() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNazev());
-                }
+                this.setText(item);
                 this.setOnMousePressed(event -> {
-                    //hra.getHerniPlan().setAktualniProstor(item);
-                    hra.zpracujPrikaz("jdi "+item.getNazev());
-                    //hra.zpracujPrikaz();
+                    hra.zpracujPrikaz("jdi "+item);
                 });
             }
-
         });
         this.getChildren().addAll(listVychodu);
         hra.getHerniPlan().registerObserver(this);
