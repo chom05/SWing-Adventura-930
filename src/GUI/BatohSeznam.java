@@ -18,14 +18,14 @@ import logika.IHra;
 import main.Main;
 
 /**
- * Třída vytvářející panel batohu.
+ * Třída vytvářející panel batohu
  *
  * @author Michal Chobola - chom05
- * @created ZS 2017/2018
  */
 public class BatohSeznam extends AnchorPane implements Observer {
 
     private IHra hra;
+    private Main main;
     private ObservableList<Vec> data = FXCollections.observableArrayList();
 
     /**
@@ -34,11 +34,15 @@ public class BatohSeznam extends AnchorPane implements Observer {
      *
      * @param hra
      */
-    public BatohSeznam(IHra hra) {
+    public BatohSeznam(IHra hra,Main main) {
         this.hra = hra;
+        this.main = main;
         init();
     }
-
+    /**
+     * Inicializace třídy
+     *
+     */
     private void init() {
         ListView<Vec> listVeciVProstoru = new ListView<>(data);
         listVeciVProstoru.setOrientation(Orientation.VERTICAL);
@@ -61,7 +65,7 @@ public class BatohSeznam extends AnchorPane implements Observer {
                     setGraphic(imageView);
                 }
                 this.setOnMousePressed(event -> {
-                    hra.zpracujPrikaz("zahod "+item.getNazev());
+                    main.zadejPrikaz("zahod "+item.getNazev());
                     hra.getHerniPlan().notifyObservers();
                     update();
                 });
@@ -78,20 +82,17 @@ public class BatohSeznam extends AnchorPane implements Observer {
      */
     @Override
     public void update() {
-
         List<Vec> seznamVeci;
         seznamVeci = hra.getHerniPlan().getBatoh().getObsahBatohu();
         data.clear();
         for (Vec x : seznamVeci) {
-            //ImageView obrazek = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/" + x.getNazevObrazku()), 10, 10, false, false));
             data.add(x);
         }
     }
 
     /**
-     * Metoda zaregistruje pozorovatele k hernímu plánu při spuštění nové hry.
-     *
-     * @param novaHra
+     * Nastaví sledování nové hry.
+     * @param novaHra instance nové hry
      */
     public void newGame(IHra novaHra){
         hra.getHerniPlan().removeObserver(this);

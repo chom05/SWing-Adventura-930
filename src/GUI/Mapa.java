@@ -9,7 +9,9 @@ import main.Main;
 import utils.Observer;
 
 /**
- * Created by MajkCajk on 13.11.17.
+ * Třída vytvářející panel s mapou
+ *
+ * @author Michal Chobola - chom05
  */
 public class Mapa extends AnchorPane implements Observer {
 
@@ -20,7 +22,11 @@ public class Mapa extends AnchorPane implements Observer {
 
     private double imgWidth;
     private double imgHeight;
-
+    /**
+     * Konstruktor třídy
+     * @param hra
+     *
+     */
     public Mapa(IHra hra) {
 
         imgWidth = 512;
@@ -30,7 +36,10 @@ public class Mapa extends AnchorPane implements Observer {
 
         init();
     }
-
+    /**
+     * Inicializace třídy
+     *
+     */
     private void init() {
         obrazekImageView = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/map.jpg"), imgWidth, imgHeight, false, true));
 
@@ -40,28 +49,38 @@ public class Mapa extends AnchorPane implements Observer {
         app = (ImageView) (Node) this.getChildren().get(1);
         update();
     }
-
+    /**
+     * Getter na šírku mapy
+     */
     public double getImgWidth() {
         return imgWidth;
     }
 
+    /**
+     * Getter na výšku mapy
+     */
     public double getImgHeight() {
         return imgHeight;
     }
 
+    /**
+     * Nastaví sledování nové hry.
+     * @param novaHra instance nové hry
+     */
     public void newGame(IHra novaHra){
         hra.getHerniPlan().removeObserver(this);
         hra = novaHra;
         hra.getHerniPlan().registerObserver(this);
         update();
     }
-
+    /**
+     * Metoda vymaže vše z panelu a následně aktualizuje obsah při každé změně.
+     * mapy.
+     */
     @Override
     public void update() {
         postava.setX(hra.getHerniPlan().getAktualniProstor().getPosTop());
         postava.setY(hra.getHerniPlan().getAktualniProstor().getPosLeft());
-        //this.setTopAnchor(postava, hra.getHerniPlan().getAktualniProstor().getPosTop());
-        //this.setLeftAnchor(postava, hra.getHerniPlan().getAktualniProstor().getPosLeft());
     }
 
 }

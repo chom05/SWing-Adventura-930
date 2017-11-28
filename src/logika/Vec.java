@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 public class Vec {
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
+    private String nazevProVypis;
     private String popis;
     private boolean prenositelna;
     private String nazevObrazku;
@@ -26,8 +27,9 @@ public class Vec {
      *  @param popis - popis věci
      *  @param prenositelna - určuje přenositelnost věci
      */
-    public Vec(String nazev, String popis, boolean prenositelna, String nazevObrazku) {
+    public Vec(String nazev, String nazevProVypis, String popis, boolean prenositelna, String nazevObrazku) {
         this.nazev = nazev;
+        this.nazevProVypis = nazevProVypis;
         this.popis = popis;
         this.prenositelna = prenositelna;
         this.nazevObrazku = nazevObrazku;
@@ -72,4 +74,12 @@ public class Vec {
 
     }
 
+    /**
+     * Vrátí název pro vypis do ListView
+     *
+     * @return String nazevProVypis
+     */
+    public String getNazevProVypis() {
+        return nazevProVypis;
+    }
 }

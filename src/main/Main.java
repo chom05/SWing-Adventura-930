@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
-
 
 import GUI.*;
 
@@ -31,8 +25,9 @@ import logika.IHra;
 
 
 /**
+ * Třída Main
  *
- * @author chom05
+ * @author Michal Chobola - chom05
  */
 
 public class Main extends Application {
@@ -42,7 +37,7 @@ public class Main extends Application {
 
     private TextField zadejPrikazTextArea;
 
-    private Label inventory = new Label();
+    private Label inventory = new Label("Inventář");
     private Label outventory = new Label("Outventář");
 
     private Mapa mapa;
@@ -66,10 +61,10 @@ public class Main extends Application {
         mapa = new Mapa(hra);
         hrac = new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/postava.png"), 96, 123, false, true));
         menuLista = new MenuLista(hra, this);
-        batohSeznam = new BatohSeznam(hra);
+        batohSeznam = new BatohSeznam(hra,this);
         listVeciVProstoru = new ListVeciVProstoru(hra, this);
 
-        listVychodu = new ListVychodu(hra);
+        listVychodu = new ListVychodu(hra, this);
         prostorButton = new Button("Potvrdit");
         zahodButton = new Button("Zahodit");
 
@@ -79,11 +74,13 @@ public class Main extends Application {
         borderPaneRight.setPadding(new Insets(0, 0, 0, 10));
         BorderPane borderPaneRightBottom = new BorderPane();
         borderPaneRightBottom.setPadding(new Insets(0, 0, 0, 10));
-        //BorderPane buttonPane = new BorderPane();
         borderPane.setCenter(borderPaneInside);
 
         inventory.setText("Inventář");
-        inventory.setFont(Font.font("Courier", FontWeight.BOLD, 12));
+        inventory.setFont(Font.font("Courier", FontWeight.BOLD, 14));
+
+        outventory.setText("Outventář");
+        outventory.setFont(Font.font("Courier", FontWeight.BOLD, 14));
 
         // Text s prubehem hry
         centralText = new TextArea();
@@ -93,7 +90,6 @@ public class Main extends Application {
         centralText.setEditable(false);
         borderPaneInside.setCenter(centralText);
 
-        //initListProstoru();
 
 
         //label s textem zadej prikaz
@@ -101,7 +97,8 @@ public class Main extends Application {
         zadejPrikazLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 
         // text area do ktere piseme prikazy
-        zadejPrikazTextArea = new TextField("...");
+        zadejPrikazTextArea = new TextField("");
+        zadejPrikazTextArea.setPromptText("...");
         zadejPrikazTextArea.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -113,7 +110,7 @@ public class Main extends Application {
                 centralText.appendText("\n" + vstupniPrikaz + "\n");
                 centralText.appendText("\n" + odpovedHry + "\n");
 
-                zadejPrikazTextArea.setText("");
+                zadejPrikazTextArea.setPromptText("...");
 
                 if (hra.konecHry()) {
                     zadejPrikazTextArea.setEditable(false);
@@ -136,10 +133,11 @@ public class Main extends Application {
             }
         });
 
-        borderPaneRight.setTop(listVeciVProstoru);
-        borderPaneRight.setCenter(inventory);
-        borderPaneRight.setCenter(borderPaneRightBottom);
+        borderPaneRight.setTop(outventory);
+        borderPaneRight.setCenter(listVeciVProstoru);
+        borderPaneRight.setBottom(borderPaneRightBottom);
 
+        borderPaneRightBottom.setTop(inventory);
         borderPaneRightBottom.setLeft(hrac);
         borderPaneRightBottom.setRight(batohSeznam);
         borderPaneRightBottom.setBottom(listVychodu);
@@ -148,7 +146,6 @@ public class Main extends Application {
         borderPane.setBottom(dolniLista);
         borderPane.setTop(menuLista);
         borderPane.setRight(borderPaneRight);
-        //borderPane.setLeft(borderPaneRightBottom);
 
         Scene scene = new Scene(borderPane, 750, 900);
         primaryStage.setTitle("Adventura");
@@ -158,54 +155,62 @@ public class Main extends Application {
         zadejPrikazTextArea.requestFocus();
     }
 
-    /*
-    private void initListProstoru() {
-        prostorButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+    /**
+     * metoda pro externi vypsání příkazu z GUI tříd
+     *
+     */
+    public void zadejPrikaz (String vstupniPrikaz) {
+        String odpovedHry = hra.zpracujPrikaz(vstupniPrikaz);
 
-                String value = (String) listVychodu.getListView().get();
-                String prikaz = "jdi " + value;
-                String text = hra.zpracujPrikaz(prikaz);
+        centralText.appendText("\n" + vstupniPrikaz + "\n");
+        centralText.appendText("\n" + odpovedHry + "\n");
 
-                //Zpracovani textu na centralni panel
-                centralText.appendText("\n\n" + prikaz + "\n");
-                centralText.appendText("\n\n" + text + "\n");
+        zadejPrikazTextArea.setText("");
 
-                zadejPrikazTextArea.setText("");
-
-            }
-        });
-    }
-    */
-
-    public TextArea getCentralText() {
-        return centralText;
+        if (hra.konecHry()) {
+            zadejPrikazTextArea.setEditable(false);
+            centralText.appendText(hra.vratEpilog());
+        }
     }
 
+    /**
+     * Metoda vrátí mapu
+     *
+     * @return mapa
+     */
     public Mapa getMapa() {
         return mapa;
     }
 
     /**
-     * @return Stage
+     * Metoda vrátí stage
+     *
+     * @return stage
      */
     public Stage getStage() {
         return stage;
     }
 
     /**
-     * @param stage
+     * Metoda nastaví stage
+     *
+     * @return stage
      */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
+    /**
+     * Metoda zaregistruje pozorovatele k hernímu plánu při spuštění nové hry.
+     *
+     * @param novaHra
+     */
     public void newGame(IHra novaHra){
         this.hra = novaHra;
         this.mapa.newGame(novaHra);
         this.centralText.setText(novaHra.vratUvitani());
         this.batohSeznam.newGame(novaHra);
+        this.listVeciVProstoru.newGame(novaHra);
+        this.listVychodu.newGame(novaHra);
     }
 
     /**

@@ -17,6 +17,7 @@ public class Postava
     private int mluveno;    // Udává, kolikrát se s postavou mluvilo.
     private Vec vecPostavy; // Věc, kterou má postava u sebe.
     private Monstrum monstrumUkolu;
+    private String nazevObrazku;
         
     //== Konstruktory a tovární metody =============================================
 
@@ -29,13 +30,14 @@ public class Postava
      * @param   poUkoluRec        Co postava řekne kdykoliv potom, co je s ní mluveno
      * @param   ukol              Monstrum které je potřeba zabít pro splnění úkolu
      */
-    public Postava (String jmeno, String uvodniRec, String koncovaRec, String poUkoluRec, Monstrum ukol) {
+    public Postava (String jmeno, String nazevObrazku, String uvodniRec, String koncovaRec, String poUkoluRec, Monstrum ukol) {
         this.jmeno = jmeno;
         this.uvodniRec = uvodniRec;
         this.koncovaRec = koncovaRec;
         this.poUkoluRec = poUkoluRec;
         this.mluveno = 0;
         monstrumUkolu = ukol;
+        this.nazevObrazku = nazevObrazku;
     }
 
     /**
@@ -118,4 +120,12 @@ public class Postava
         return this.mluveno;
     }
 
+    /**
+     * Vrátí název obrázku pro jeho zobrazení
+     *
+     * @return String nazevObrazku
+     */
+    public String getNazevObrazku() {
+        return nazevObrazku;
+    }
 }

@@ -14,26 +14,34 @@ import logika.Hra;
 import logika.IHra;
 import main.Main;
 /**
- * Created by MajkCajk on 13.11.17.
+ * Třída vytvářející panel s horní lištou
+ *
+ * @author Michal Chobola - chom05
  */
 public class MenuLista extends MenuBar{
 
     private IHra hra;
     private Main main;
-
+    /**
+     * Konstruktor třídy
+     *
+     * @param hra
+     */
     public MenuLista(IHra hra, Main main){
         this.hra = hra;
         this.main = main;
         init();
     }
-
+    /**
+     * Inicializace třídy
+     *
+     */
     private void init(){
 
         Menu novySoubor = new Menu("Adventura");
         Menu napoveda = new Menu("Help");
 
         MenuItem novaHra = new MenuItem("Nova hra");
-        //, new ImageView(new Image(Main.class.getResourceAsStream("/zdroje/ikona.png")))
 
         novaHra.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
         MenuItem konecHry = new MenuItem("Konec hry");
@@ -66,14 +74,15 @@ public class MenuLista extends MenuBar{
         oProgramu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Alert oProgramuAlert = new Alert(Alert.AlertType.INFORMATION);
+                Stage stage = new Stage();
+                stage.setTitle("O Programu");
 
-                oProgramuAlert.setTitle("O pragramu");
-                oProgramuAlert.setHeaderText("Super adventura XYZ");
-                oProgramuAlert.setContentText("Loren ipsum");
-                oProgramuAlert.initOwner(main.getStage());
+                WebView webView = new WebView();
 
-                oProgramuAlert.showAndWait();
+                webView.getEngine().load(Main.class.getResource("/zdroje/zadani/zadani.html").toExternalForm());
+
+                stage.setScene(new Scene(webView, 700,500));
+                stage.show();
             }
         });
 
@@ -86,7 +95,7 @@ public class MenuLista extends MenuBar{
 
                 WebView webView = new WebView();
 
-                webView.getEngine().load(Main.class.getResource("/zdroje/napoveda.html").toExternalForm());
+                webView.getEngine().load(Main.class.getResource("/zdroje/napoveda/napoveda.html").toExternalForm());
 
                 stage.setScene(new Scene(webView, 500,500));
                 stage.show();

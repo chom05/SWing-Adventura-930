@@ -11,6 +11,7 @@
 public class Monstrum
 {
     private String nazev;
+    private String nazevObrazku;
     private String uvodniRec;
     private String koncovaRec;
     private String potreba1;
@@ -30,13 +31,15 @@ public class Monstrum
      * @param   potreba2   Vec kterou musí hráč vlastnit v batohu pro poražení monstra
      * @param   vecMonstra   Věc kterou monstrum po umření zahodí
      */
-    public Monstrum (String nazev, String uvodniRec, String koncovaRec, String potreba1, String potreba2, Vec vecMonstra) {
+    public Monstrum (String nazev, String nazevObrazku, String uvodniRec, String koncovaRec, String potreba1,
+                     String potreba2, Vec vecMonstra) {
         this.nazev = nazev;
         this.uvodniRec = uvodniRec;
         this.koncovaRec = koncovaRec;
         this.potreba1 = potreba1;
         this.potreba2 = potreba2;
         this.vecMonstra = vecMonstra;
+        this.nazevObrazku = nazevObrazku;
         zabito = false;
     }
 
@@ -89,7 +92,7 @@ public class Monstrum
     /**
      * Metoda vloží věc kterou monstrum po smrtí vyhodí
      *
-     * @param Vec - daná věc kterou pak vyhodí
+     * @param vecMonstra - daná věc kterou pak vyhodí
      */
     public void vlozVec (Vec vecMonstra) {
         this.vecMonstra = vecMonstra;
@@ -123,10 +126,18 @@ public class Monstrum
     /**
      * Metoda nastaví smrt Monstra (po bitvě)
      * 
-     * @param boolean 
+     * @param zabit
      */
     public void setZabito(boolean zabit){
         zabito = zabit;
     }
-    
+
+    /**
+     * Vrátí název obrázku pro jeho zobrazení
+     *
+     * @return String nazevObrazku
+     */
+    public String getNazevObrazku() {
+        return nazevObrazku;
+    }
 }

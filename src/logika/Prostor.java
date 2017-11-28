@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 public class Prostor {
 
     private String nazev;
+    private String nazevProVypis;
     private String popis;
     private boolean bylJsemTady;
     private boolean zamcena;
@@ -47,8 +48,9 @@ public class Prostor {
      * víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis, boolean zamcena, double posLeft, double posTop) {
+    public Prostor(String nazev, String nazevProVypis, String popis, boolean zamcena, double posLeft, double posTop) {
         this.nazev = nazev;
+        this.nazevProVypis = nazevProVypis;
         this.popis = popis;
         this.zamcena = zamcena;
         this.posLeft = posLeft;
@@ -66,6 +68,23 @@ public class Prostor {
     public double getPosTop() {
         return posTop;
     }
+
+    public List<Postava> getSeznamPostav() {
+        return seznamPostav;
+    }
+
+    public List<Monstrum> getSeznamMonster() {
+        List<Monstrum> listMonster = new ArrayList<>();
+        for(Monstrum m : seznamMonster){
+            if (!m.isZabito()) listMonster.add(m);
+        }
+        return listMonster;
+    }
+
+    public String getNazevProVypis() {
+        return nazevProVypis;
+    }
+
     /**
      * Definuje východ z prostoru (sousední/vedlejsi prostor). Vzhledem k tomu,
      * že je použit Set pro uložení východů, může být sousední prostor uveden
