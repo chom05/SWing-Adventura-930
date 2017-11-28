@@ -64,7 +64,7 @@ public class ListVeciVProstoru extends BorderPane implements Observer {
                     imageView.setFitHeight(40);
                     imageView.setPreserveRatio(true);
                     setGraphic(imageView);
-                    setText(item.getNazev());
+                    setText(item.getNazevProVypis());
                 }
                 this.setOnMousePressed(event -> {
                     main.zadejPrikaz("vezmi "+item.getNazev());
